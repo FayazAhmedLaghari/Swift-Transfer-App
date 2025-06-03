@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:swifttransferapp/Widgets/custom_button.dart';
+import 'Pcrocessing.dart';
 
 class PaymentScreen extends StatelessWidget {
   final double amount = 270.0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Payment")),
+      appBar: AppBar(
+        title: Text("Payment", style: TextStyle(color: Colors.blue)),
+        leading: BackButton(color: Colors.blue),
+        backgroundColor: Colors.white,
+        elevation: 0,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -33,7 +38,13 @@ class PaymentScreen extends StatelessWidget {
             SizedBox(height: 20),
             CustomBlueButton(
               text: 'Pay Securely',
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const ProcessingScreen()),
+                );
+              },
             ),
           ],
         ),

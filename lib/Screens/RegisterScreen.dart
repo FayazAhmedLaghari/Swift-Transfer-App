@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:swifttransferapp/Screens/KYCFormScreen.dart';
 import '../Widgets/custom_button.dart';
 import 'LoginScreen.dart';
 
@@ -45,10 +46,10 @@ class RegisterScreen extends StatelessWidget {
             CustomBlueButton(
               text: 'Register',
               onPressed: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => RegisterScreen()),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => KYCFormScreen()),
+                );
               },
             ),
             SizedBox(height: 12),

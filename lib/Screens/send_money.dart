@@ -36,7 +36,12 @@ class _SendMoneyScreenState extends State<SendMoneyScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Send Money")),
+      appBar: AppBar(
+        title: Text("Send Money", style: TextStyle(color: Colors.blue)),
+        leading: BackButton(color: Colors.blue),
+        backgroundColor: Colors.white,
+        elevation: 0,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -77,6 +82,7 @@ class _SendMoneyScreenState extends State<SendMoneyScreen> {
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),
         notchMargin: 8.0,
+        padding: EdgeInsets.only(bottom: 10),
         child: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           currentIndex:

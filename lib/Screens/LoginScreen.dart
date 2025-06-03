@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:swifttransferapp/Screens/KYCFormScreen.dart';
 
 import '../Widgets/custom_button.dart';
+import 'HomeScreen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -65,7 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => KYCFormScreen()),
+                  MaterialPageRoute(builder: (context) => HomeScreen()),
                 );
               },
             ),

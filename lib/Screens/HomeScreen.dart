@@ -27,14 +27,22 @@ class _HomeScreenState extends State<HomeScreen> {
     final double balance = 987.76;
 
     return Scaffold(
-      appBar: AppBar(title: Text("Home")),
-      resizeToAvoidBottomInset: false, // Prevents automatic resizing
+      appBar: AppBar(
+        title: Text("Home", style: TextStyle(color: Colors.blue)),
+        leading: BackButton(color: Colors.blue),
+        backgroundColor: Colors.white,
+        elevation: 0,
+      ),
+      resizeToAvoidBottomInset: true, // allow for keyboard-safe resizing
       body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.all(16.0),
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16.0).copyWith(
+            bottom: MediaQuery.of(context).viewInsets.bottom + 80,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
                 child: Column(
                   children: [
                     Text(
@@ -69,76 +77,61 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 20),
-                    Row(
-                      children: [
-                        Text("Quick Send",
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        Spacer(),
-                        IconButton(
-                          onPressed: () {},
-                          icon: Icon(Icons.add_circle_outline),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 8),
-                    SizedBox(
-                      height: 90,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 6,
-                        itemBuilder: (_, index) => Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 6),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              CircleAvatar(
-                                radius: 25,
-                                backgroundImage: AssetImage('assets/user.jpg'),
-                              ),
-                              SizedBox(height: 6),
-                              Text(
-                                "User ${index + 1}",
-                                style: TextStyle(fontSize: 12),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 16),
-                    ListView(
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      children: [
-                        ListTile(
-                          title: Text("Imaan Fatima"),
-                          subtitle: Text("20/05/2025"),
-                          trailing: Text("\$198"),
-                        ),
-                        ListTile(
-                          title: Text("Haya Noor"),
-                          subtitle: Text("18/05/2025"),
-                          trailing: Text("\$99"),
-                        ),
-                        ListTile(
-                          title: Text("Wareesha"),
-                          subtitle: Text("29/04/2025"),
-                          trailing: Text("\$309"),
-                        ),
-                        ListTile(
-                          title: Text("M Ibrahim"),
-                          subtitle: Text("05/05/2025"),
-                          trailing: Text("\$270"),
-                        ),
-                      ],
-                    ),
                   ],
                 ),
               ),
-            ),
-          ],
+              SizedBox(height: 24),
+              Row(
+                children: [
+                  Text(
+                    "Quick Send",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Spacer(),
+                  IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.add_circle_outline),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 90,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 6,
+                  itemBuilder: (_, index) => Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        CircleAvatar(
+                          radius: 25,
+                          backgroundImage: AssetImage('assets/user.jpg'),
+                        ),
+                        SizedBox(height: 6),
+                        Text(
+                          "User ${index + 1}",
+                          style: TextStyle(fontSize: 12),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 16),
+              ListView(
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                children: [
+                  transactionTile("Imaan Fatima", "20/05/2025", "\$198"),
+                  transactionTile("Haya Noor", "18/05/2025", "\$99"),
+                  transactionTile("Wareesha", "29/04/2025", "\$309"),
+                  transactionTile("M Ibrahim", "05/05/2025", "\$270"),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -152,6 +145,7 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),
         notchMargin: 8.0,
+        padding: EdgeInsets.only(bottom: 10),
         child: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           currentIndex:
@@ -170,7 +164,7 @@ class _HomeScreenState extends State<HomeScreen> {
               label: 'Send',
             ),
             BottomNavigationBarItem(
-              icon: SizedBox.shrink(), // Empty space for FAB
+              icon: SizedBox.shrink(), // space for FAB
               label: '',
             ),
             BottomNavigationBarItem(
@@ -187,6 +181,15 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget transactionTile(String name, String date, String amount) {
+    return ListTile(
+      leading: Icon(Icons.verified, color: Colors.amber),
+      title: Text(name),
+      subtitle: Text(date),
+      trailing: Text(amount),
     );
   }
 }
