@@ -13,6 +13,7 @@ class KYCFormScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text("KYC Form", style: TextStyle(color: Colors.blue)),
         leading: BackButton(color: Colors.blue),

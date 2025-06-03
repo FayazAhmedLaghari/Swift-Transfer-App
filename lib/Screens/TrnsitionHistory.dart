@@ -1,99 +1,4 @@
 import 'package:flutter/material.dart';
-import 'Receive.dart';
-import 'TraasferSuccees.dart';
-
-class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
-
-  @override
-  State<MainScreen> createState() => _MainScreenState();
-}
-
-class _MainScreenState extends State<MainScreen> {
-  int _selectedIndex = 2;
-
-  // Screens List
-  final List<Widget> _screens = [
-    ReceiveScreen(),
-    const SendScreen(),
-    const TransactionScreen(),
-    const ProfileScreen(),
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-  Widget navItem(IconData icon, String label, int index,
-      {bool isProfile = false}) {
-    bool isSelected = _selectedIndex == index;
-
-    return GestureDetector(
-      onTap: () => _onItemTapped(index),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          isProfile
-              ? const CircleAvatar(
-                  radius: 12,
-                  backgroundImage:
-                      AssetImage('assets/user.jpg') // if image in assets
-
-                  )
-              : Icon(icon, color: isSelected ? Colors.lightBlue : Colors.grey),
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 11,
-              color: isSelected ? Colors.lightBlue : Colors.grey,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: _screens[_selectedIndex],
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => TransferSuccessScreen()),
-          );
-        },
-        backgroundColor: Colors.lightBlue,
-        child: const Icon(
-          Icons.qr_code_scanner,
-          size: 28,
-          color: Colors.white,
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
-        notchMargin: 8,
-        child: SizedBox(
-          height: 60,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              navItem(Icons.home, 'Home', 0),
-              navItem(Icons.send, 'Send', 1),
-              const SizedBox(width: 48),
-              navItem(Icons.swap_horiz, 'Transaction', 2),
-              navItem(Icons.person, 'Profile', 3, isProfile: true),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
 
 class TransactionScreen extends StatelessWidget {
   const TransactionScreen({super.key});
@@ -130,6 +35,8 @@ class TransactionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
+
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios, color: Colors.blue),
@@ -139,7 +46,7 @@ class TransactionScreen extends StatelessWidget {
         elevation: 0,
         toolbarHeight: 50,
       ),
-      backgroundColor: Colors.white,
+      
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(

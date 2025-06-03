@@ -13,10 +13,12 @@ class _ScanQRCodeState extends State<ScanQRCode> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        leading: Icon(
-          Icons.cut_outlined,
-          color: Colors.black,
-        ),
+        leading: IconButton(
+  icon: Icon(Icons.close), // ❌ Cut icon
+  onPressed: () {
+    Navigator.pop(context); // Goes back to previous screen
+  },
+),
         backgroundColor: Colors.white,
         title: Text(
           "Scan QR Code",

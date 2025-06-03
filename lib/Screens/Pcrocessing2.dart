@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:swifttransferapp/Screens/HomeScreen.dart';
+import 'package:swifttransferapp/Screens/Receive.dart';
 import 'dart:async';
 import 'TrnsitionHistory.dart';
 
@@ -18,7 +20,7 @@ class _ProcessingScreenState extends State<ProcessingScreen2> {
     Timer(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const MainScreen()),
+        MaterialPageRoute(builder: (context) => ReceiveScreen()),
       );
     });
   }
@@ -26,6 +28,8 @@ class _ProcessingScreenState extends State<ProcessingScreen2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
+
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios, color: Colors.blue),
@@ -35,7 +39,6 @@ class _ProcessingScreenState extends State<ProcessingScreen2> {
         elevation: 0,
         toolbarHeight: 50,
       ),
-      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

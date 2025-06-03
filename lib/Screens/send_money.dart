@@ -18,24 +18,12 @@ class _SendMoneyScreenState extends State<SendMoneyScreen> {
 
   final TextEditingController phoneController = TextEditingController();
 
-  int _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    if (index == 1) {
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(builder: (context) => SendMoneyScreen()),
-      // );
-    } else if (index != 2) {
-      setState(() {
-        _selectedIndex = index;
-      });
-    }
-  }
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
+
       appBar: AppBar(
         title: Text("Send Money", style: TextStyle(color: Colors.blue)),
         leading: BackButton(color: Colors.blue),
@@ -78,46 +66,6 @@ class _SendMoneyScreenState extends State<SendMoneyScreen> {
           ],
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
-        notchMargin: 8.0,
-        padding: EdgeInsets.only(bottom: 10),
-        child: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          currentIndex:
-              _selectedIndex > 1 ? _selectedIndex - 1 : _selectedIndex,
-          onTap: (index) {
-            if (index >= 2) index += 1;
-            _onItemTapped(index);
-          },
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.send_outlined),
-              label: 'Send',
-            ),
-            BottomNavigationBarItem(
-              icon: SizedBox.shrink(), // Placeholder for FAB
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.compare_arrows_outlined),
-              label: 'Transaction',
-            ),
-            BottomNavigationBarItem(
-              icon: CircleAvatar(
-                radius: 12,
-                backgroundImage: AssetImage('assets/user.jpg'),
-              ),
-              label: 'Profile',
-            ),
-          ],
-        ),
-      ),
-    );
+        );
   }
 }

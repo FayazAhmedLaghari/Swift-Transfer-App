@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:swifttransferapp/Screens/HomeScreen.dart';
 
 class ReceiveScreen extends StatelessWidget {
   final List<Map<String, String>> transactions = [
@@ -21,7 +22,10 @@ class ReceiveScreen extends StatelessWidget {
               padding: const EdgeInsets.only(left: 8.0, top: 8),
               child: IconButton(
                 icon: Icon(Icons.arrow_back, color: Colors.lightBlue),
-                onPressed: () {},
+                onPressed: () {
+                     Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => HomeScreen()));
+                },
               ),
             ),
 

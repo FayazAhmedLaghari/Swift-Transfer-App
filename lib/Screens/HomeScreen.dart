@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:swifttransferapp/Screens/Profile.dart';
+import 'package:swifttransferapp/Screens/TrnsitionHistory.dart';
 import 'send_money.dart';
+import 'Receive.dart';
+import 'TraasferSuccees.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -9,31 +13,92 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
+  final List<Widget> _screens = [
+    MainHomeView(),
+     SendMoneyScreen(),
+    const TransactionScreen(),
+    const ProfileScreenSimple(),
+  ];
+
   void _onItemTapped(int index) {
-    if (index == 1) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => SendMoneyScreen()),
-      );
-    } else if (index != 2) {
-      setState(() {
-        _selectedIndex = index;
-      });
-    }
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 
+  Widget navItem(IconData icon, String label, int index,
+      {bool isProfile = false}) {
+    bool isSelected = _selectedIndex == index;
+
+    return GestureDetector(
+      onTap: () => _onItemTapped(index),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          isProfile
+              ? const CircleAvatar(
+                  radius: 12,
+                  backgroundImage: AssetImage('assets/user.jpg'),
+                )
+              : Icon(icon,
+                  color: isSelected ? Colors.lightBlue : Colors.grey),
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 11,
+              color: isSelected ? Colors.lightBlue : Colors.grey,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: _screens[_selectedIndex],
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => TransferSuccessScreen()),
+          );
+        },
+        backgroundColor: Colors.lightBlue,
+        child: const Icon(Icons.qr_code_scanner, size: 28, color: Colors.white),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.white,
+        shape: const CircularNotchedRectangle(),
+        notchMargin: 8,
+        child: SizedBox(
+          height: 60,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              navItem(Icons.home, 'Home', 0),
+              navItem(Icons.send, 'Send', 1),
+              const SizedBox(width: 48),
+              navItem(Icons.swap_horiz, 'Transaction', 2),
+              navItem(Icons.person, 'Profile', 3, isProfile: true),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class MainHomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double balance = 987.76;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Home", style: TextStyle(color: Colors.blue)),
-        leading: BackButton(color: Colors.blue),
-        backgroundColor: Colors.white,
-        elevation: 0,
-      ),
-      resizeToAvoidBottomInset: true, // allow for keyboard-safe resizing
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(16.0).copyWith(
@@ -110,7 +175,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         SizedBox(height: 6),
                         Text(
-                          "User ${index + 1}",
+                          "User \${index + 1}",
                           style: TextStyle(fontSize: 12),
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -134,53 +199,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _onItemTapped(2);
-        },
-        backgroundColor: Colors.blue,
-        child: Icon(Icons.qr_code_scanner, size: 30),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
-        notchMargin: 8.0,
-        padding: EdgeInsets.only(bottom: 10),
-        child: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          currentIndex:
-              _selectedIndex > 1 ? _selectedIndex - 1 : _selectedIndex,
-          onTap: (index) {
-            if (index >= 2) index += 1;
-            _onItemTapped(index);
-          },
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.send_outlined),
-              label: 'Send',
-            ),
-            BottomNavigationBarItem(
-              icon: SizedBox.shrink(), // space for FAB
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.compare_arrows_outlined),
-              label: 'Transactions',
-            ),
-            BottomNavigationBarItem(
-              icon: CircleAvatar(
-                radius: 12,
-                backgroundImage: AssetImage('assets/user.jpg'),
-              ),
-              label: 'Profile',
-            ),
-          ],
-        ),
-      ),
     );
   }
 
@@ -193,3 +211,23 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
+class SendScreen extends StatelessWidget {
+  const SendScreen({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+        child: Text("\uD83D\uDCE4 Send Screen", style: TextStyle(fontSize: 24)));
+  }
+}
+
+class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+        child:
+            Text("\uD83D\uDC64 Profile Screen", style: TextStyle(fontSize: 24)));
+  }
+}
+

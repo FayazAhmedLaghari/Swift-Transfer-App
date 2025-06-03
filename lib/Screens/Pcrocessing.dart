@@ -25,6 +25,8 @@ class _ProcessingScreenState extends State<ProcessingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
+
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios, color: Colors.blue),
@@ -34,7 +36,7 @@ class _ProcessingScreenState extends State<ProcessingScreen> {
         elevation: 0,
         toolbarHeight: 50,
       ),
-      backgroundColor: Colors.white,
+      
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

@@ -11,7 +11,12 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Register")),
+      backgroundColor: Colors.white,
+
+      appBar: AppBar(title: Text("Register"),
+      backgroundColor: Colors.white,
+      
+      ),
       body: Padding(
         padding: const EdgeInsets.all(24.0),
         child: Column(

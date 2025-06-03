@@ -14,7 +14,9 @@ class TransferSuccessScreen extends StatelessWidget {
               alignment: Alignment.topLeft,
               child: IconButton(
                 icon: Icon(Icons.arrow_back, color: Colors.lightBlue),
-                onPressed: () {},
+                onPressed: () {
+    Navigator.pop(context); // Goes back to previous screen
+                },
               ),
             ),
 
